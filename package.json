@@ -2,7 +2,7 @@
   "name": "vue-erp",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "773714759@qq.com <773714759@qq.com>",
+  "author": "fangweijun <773714759@qq.com>",
   "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
@@ -11,6 +11,7 @@
     "lint": "eslint --ext .js,.vue src"
   },
   "dependencies": {
+    "element-ui": "^1.4.5",
     "vue": "^2.4.2"
   },
   "devDependencies": {

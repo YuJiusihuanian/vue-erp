@@ -1,16 +1,21 @@
 var path = require('path')
+var glob = require('glob')
+
 var utils = require('./utils')
 var config = require('../config')
 var vueLoaderConfig = require('./vue-loader.conf')
+
+var entries = getEntry('./src/pages/**/*.js')
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
 
 module.exports = {
-  entry: {
-    app: './src/main.js'
-  },
+  entry:entries,
+  // entry: {
+  //   app: './src/main.js'
+  // },
   output: {
     path: config.build.assetsRoot,
     filename: '[name].js',
@@ -22,20 +27,11 @@ module.exports = {
     extensions: ['.js', '.vue', '.json'],
     alias: {
       'vue$': 'vue/dist/vue.esm.js',
-      '@': resolve('src'),
+      '@': resolve('src')
     }
   },
   module: {
     rules: [
-      {
-        test: /\.(js|vue)$/,
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        include: [resolve('src'), resolve('test')],
-        options: {
-          formatter: require('eslint-friendly-formatter')
-        }
-      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -72,4 +68,18 @@ module.exports = {
       }
     ]
   }
+}
+
+
+//获取入口js文件
+function getEntry(globPath) {
+  var entries = {},
+    basename, tmp, pathname;
+
+  glob.sync(globPath).forEach(function (entry) {
+    basename = path.basename(entry, path.extname(entry));
+    pathname = basename.split("_")[0];  //index_main.js得到index
+    entries[pathname] = entry;
+  });
+  return entries;
 }
