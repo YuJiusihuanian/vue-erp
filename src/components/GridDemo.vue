@@ -1,7 +1,8 @@
+/**
+* Created by fangweijun on 2017/9/27.
+*/
 <template>
   <div id="GridDemo">
-    <el-button @click="clickAlter()" type="primary" icon="edit">修改</el-button>
-    <el-button @click="add()" type="primary" icon="edit">新增一行</el-button>
     <el-table
       :data="tableData"
       border
@@ -34,41 +35,48 @@
 
 <script>
   export default {
-    data() {
+    props: ['alter', 'tableData'],
+    data () {
       return {
-        tableData: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-          date: '2016-05-04',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-          date: '2016-05-01',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-          date: '2016-05-03',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1516 弄'
-        }],
-        input:"",
-        alter:true
+        input: '',
       }
     },
     methods: {
-      clickAlter(){
-        this.alter = !this.alter;
-        console.log(this.tableData);
-      },
-      add(){
-          var a ={
-              data:'',
-              name:'',
-              address:''
-          }
-          this.tableData.push(a);
+      add () {
+        var a ={
+          data: '',
+          name: '',
+          address: ''
+        }
+        this.tableData.push(a)
+      }
+    },
+    mounted () {
+//      console.log(this.tableData[this.tableData.length - 1])
+//      this.tableData.push({
+//        date: '',
+//        name: '',
+//        address: ''
+//      })
+//      console.log(this.tableData[this.tableData.length - 1])
+    },
+    watch: {
+      'input' (val, oldval) {
+        console.log(val);
+        console.log(oldval);
+//        deep: true
+//        console.log(val)
+//        console.log(oldval)
+//        let check = this.tableData[this.tableData.length - 1];
+//        console.log(check);
+//        if (check.data != this.tableData[this.tableData.length - 1].data || check.name != this.tableData[this.tableData.length - 1].name ||
+//          check.address != this.tableData[this.tableData.length - 1].address) {
+//          this.tableData.push({
+//            date: '',
+//            name: '',
+//            address: ''
+//          })
+//        }
       }
     }
   }
