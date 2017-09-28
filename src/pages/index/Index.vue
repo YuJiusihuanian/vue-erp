@@ -3,7 +3,8 @@
 */
 <template>
   <div id="Index">
-    <but v-on:clickAlter = "clickAlter" class="mod" text="修改" icon="edit"></but>
+    <but @clickMethod="clickAlter" class="mod" text="修改" icon="edit" :disabled="disabled"></but>
+    <but @clickMethod="save" class="mod" text="保存" icon="check":disabled="!disabled"></but>
     <grid-demo :alter=alter :tableData=tableData></grid-demo>
   </div>
 </template>
@@ -33,7 +34,7 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
         }],
-        aa: this.tableData,
+        disabled: false
       }
     },
     components: {
@@ -43,32 +44,26 @@
     },
     methods: {
       clickAlter () {
-        this.alter = !this.alter
-        console.log(this.tableData)
+        this.disabled = !this.disabled
+        if (this.alter == true){
+          this.tableData.push({
+            date: '',
+            name: '',
+            address: ''
+          })
+        }
+        this.alter = false
+      },
+      save () {
+        this.disabled = !this.disabled
+        if (this.alter == false){
+          this.tableData.pop()
+        }
+        this.alter = true
       }
     },
     watch: {
-      'ccc': function (val,oldval) {
-          console.log(val)
-          console.log(oldval)
-      },
-      tableData : {
-        handler: function (val, oldVal) {
-          this.aa = this.tableData[this.tableData.length - 1]
-          console.log(this.aa)
-        },
-        deep: true
-      },
-//      aa : {
-//        handler: function (val, oldVal) {
-//          this.tableData.push({
-//            data: '',
-//            name: '',
-//            address: ''
-//          })
-//        },
-//        deep: true
-//      }
+
     }
   }
 
@@ -76,5 +71,7 @@
 <style>
   #Index .mod{
     margin-bottom:10px;
+    width:10%;
+    float:left;
   }
 </style>

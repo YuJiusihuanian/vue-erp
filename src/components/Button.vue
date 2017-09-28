@@ -3,20 +3,20 @@
 */
 <template>
   <div id="Button">
-    <el-button @click="clickAlter" type="primary" :icon="icon">{{text}}</el-button>
+    <el-button @click="clickMethod" type="primary" :icon="icon" :disabled="disabled">{{text}}</el-button>
   </div>
 </template>
 <script>
     export default{
       name: 'Button',
-      props: ['text', 'icon'],
+      props: ['text', 'icon', 'disabled'],
       data () {
         return {
         }
       },
       methods: {
-        clickAlter () {
-          this.$emit('clickAlter');
+        clickMethod () {
+          this.$emit('clickMethod');
         }
       }
     }
