@@ -22,4 +22,7 @@
     }
 </script>
 <style scoped>
+  #Button{
+    display:inline-block;
+  }
 </style>

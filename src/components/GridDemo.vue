@@ -21,13 +21,13 @@
         width="180">
         <template scope="scope">
             <span v-if="alter">{{ scope.row.name  }}</span>
-            <el-input v-else v-model="scope.row.name"></el-input>
+            <el-input v-else v-model="scope.row.name" @blur="addRow(scope.$index, scope.store.states.data.length)"></el-input>
         </template>
       </el-table-column>
       <el-table-column label="地址">
         <template scope="scope">
           <span v-if="alter">{{ scope.row.address  }}</span>
-          <el-input v-else v-model="scope.row.address"></el-input>
+          <el-input v-else v-model="scope.row.address" @blur="addRow(scope.$index, scope.store.states.data.length)"></el-input>
         </template>
       </el-table-column>
     </el-table>
@@ -43,11 +43,18 @@
     },
     methods: {
       addRow (row, rowN) {
-        console.log(row);
-        console.log(rowN);
+        //console.log(row);
+        //console.log(rowN);
         if (this.tableData[this.tableData.length - 1].date == '' &&
           this.tableData[this.tableData.length - 1].name == '' &&
           this.tableData[this.tableData.length - 1].address == '' ) return;
+        this.$emit('addRow');
+        this.tableData.forEach(function(a){
+            //console.log(a);
+        })
+        for (var filed in this.tableData){
+          //console.log(filed.name);
+        }
         if (row + 1 == rowN) {
           this.tableData.push({
             date: '',
@@ -55,6 +62,16 @@
             address: ''
           })
         }
+        var attributeCount = function(obj) {
+          var count = 0;
+          for (var i in obj) {
+            if (obj.hasOwnProperty(i)) {  // 建议加上判断,如果没有扩展对象属性可以不加
+              count++;
+            }
+          }
+          return count;
+        }
+        console.log(attributeCount(this.tableData[0]))
       }
     },
     mounted () {

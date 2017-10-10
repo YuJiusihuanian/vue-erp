@@ -3,9 +3,10 @@
 */
 <template>
   <div id="Index">
-    <but @clickMethod="clickAlter" class="mod" text="修改" icon="edit" :disabled="disabled"></but>
-    <but @clickMethod="save" class="mod" text="保存" icon="check":disabled="!disabled"></but>
-    <grid-demo :alter=alter :tableData=tableData></grid-demo>
+    <but @clickMethod="clickAlter" class="mod" text="修改" icon="el-icon-edit" :disabled="disabled"></but>
+    <but @clickMethod="save" class="mod" text="保存" icon="el-icon-check":disabled="!disabled"></but>
+    <grid-demo @addRow="addRow" :alter=alter :tableData=tableData :title=title></grid-demo>
+    <el-input v-model="tableData.date" placeholder="请输入内容"></el-input>
   </div>
 </template>
 <script>
@@ -34,6 +35,7 @@
           name: '王小虎',
           address: '上海市普陀区金沙江路 1516 弄'
         }],
+        title: ['data', 'name', 'address'],
         disabled: false
       }
     },
@@ -60,6 +62,10 @@
           this.tableData.pop()
         }
         this.alter = true
+      },
+      addRow (row, rowN) {
+
+
       }
     },
     watch: {
@@ -71,7 +77,5 @@
 <style>
   #Index .mod{
     margin-bottom:10px;
-    width:10%;
-    float:left;
   }
 </style>
