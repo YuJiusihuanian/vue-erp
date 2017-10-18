@@ -34,12 +34,12 @@ plugins = [
       safe: true
     }
   }),
-  // generate dist index.html with correct asset hash for caching.
-  // you can customize output by editing /index.html
+  // generate dist message.html with correct asset hash for caching.
+  // you can customize output by editing /message.html
   // see https://github.com/ampedandwired/html-webpack-plugin
   // new HtmlWebpackPlugin({
   //   filename: config.build.index,
-  //   template: 'index.html',
+  //   template: 'message.html',
   //   inject: true,
   //   minify: {
   //     removeComments: true,

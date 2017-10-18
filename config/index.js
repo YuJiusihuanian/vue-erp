@@ -23,7 +23,7 @@ function getEntry(globPath) {
 
 var pages = getEntry('src/pages/**/*.html');
 
-//入口 index: path.resolve(__dirname, '../dist/index.html')
+//入口 index: path.resolve(__dirname, '../dist/message.html')
 for (var pathname in pages) {
   build[pathname] = path.resolve(__dirname, '../dist/' + pathname + '.html')
 }
@@ -32,7 +32,7 @@ module.exports = {
   build:build,
   // build: {
   //   env: require('./prod.env'),
-  //   index: path.resolve(__dirname, '../dist/index.html'),
+  //   index: path.resolve(__dirname, '../dist/message.html'),
   //   assetsRoot: path.resolve(__dirname, '../dist'),
   //   assetsSubDirectory: 'static',
   //   assetsPublicPath: '/',
